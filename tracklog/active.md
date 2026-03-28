@@ -1,6 +1,9 @@
 # Active Context
 Updated: 2026-03-29 | By: Claude
 
+## PARALLEL MODE: OFF
+<!-- Đổi thành ON khi chạy /worktree setup -->
+
 ## NOW
 Task: Project setup complete | Status: DONE
 
@@ -16,3 +19,7 @@ Version: v0.1.0
 ## GitHub
 Repo: https://github.com/ThuPhuong1010/claude-factory
 Branch: master
+
+## LOCKED FILES
+<!-- Ghi vào đây khi edit shared/config files (chỉ dùng khi PARALLEL MODE: ON) -->
+<!-- Format: - path/to/file.ts → Agent Name (YYYY-MM-DD HH:MM) -->
