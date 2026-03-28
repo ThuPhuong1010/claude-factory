@@ -21,5 +21,18 @@
       "Bash(git push --force*)",
       "Bash(git push -f *)"
     ]
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell.exe -ExecutionPolicy Bypass -File 'd:\\Personal_Project\\Vibing\\Vibing\\.claude\\notify.ps1'",
+            "async": true
+          }
+        ]
+      }
+    ]
   }
 }

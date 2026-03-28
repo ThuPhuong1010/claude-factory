@@ -1,10 +1,18 @@
 # Active Context
-Updated: (not started) | By: —
+Updated: 2026-03-29 | By: Claude
 
 ## NOW
-Task: — | Status: NOT_STARTED
+Task: Project setup complete | Status: DONE
+
 ## PROGRESS
-Done: 0/0 | TODO: 0
+Done: 1/1 | TODO: 0
 Version: v0.1.0
+
 ## NEXT
-Run /analyze to begin.
+- Viết idea vào context/input.md
+- Chạy /variants để test approaches
+- Chạy /analyze để tạo PRD + tasks
+
+## GitHub
+Repo: https://github.com/ThuPhuong1010/claude-factory
+Branch: master
