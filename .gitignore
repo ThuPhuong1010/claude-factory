@@ -1,0 +1,94 @@
+# ── Environment & Secrets ────────────────────────────────────────────
+.env
+.env.local
+.env.*.local
+.env.production
+.env.staging
+*.pem
+*.key
+secrets.json
+credentials.json
+
+# ── Node / JavaScript / TypeScript ───────────────────────────────────
+node_modules/
+dist/
+build/
+.next/
+.nuxt/
+.output/
+out/
+*.tsbuildinfo
+.turbo/
+.vercel/
+.netlify/
+
+# ── Python ───────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+*.dist-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+
+# ── Test & Coverage ──────────────────────────────────────────────────
+coverage/
+.coverage
+*.lcov
+/test-results/
+/playwright-report/
+
+# ── Logs ─────────────────────────────────────────────────────────────
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# ── OS ───────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── IDE ──────────────────────────────────────────────────────────────
+.idea/
+*.suo
+*.user
+.vscode/settings.json
+.vscode/launch.json
+
+# ── Build Artifacts (by solution type) ───────────────────────────────
+# VSCode Extension
+*.vsix
+
+# Browser Extension
+web-ext-artifacts/
+
+# Desktop App (Electron/Tauri)
+app/dist/
+src-tauri/target/
+
+# Mobile (React Native)
+android/build/
+ios/build/
+android/.gradle/
+.expo/
+
+# Docker
+.docker/
+
+# ── Project Workspace ────────────────────────────────────────────────
+# Source code generated vào project/ — gitignore artifacts nhưng KHÔNG gitignore source
+project/node_modules/
+project/.next/
+project/dist/
+project/build/
+project/__pycache__/
+project/.venv/
+project/coverage/
