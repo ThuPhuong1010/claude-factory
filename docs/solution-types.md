@@ -81,6 +81,17 @@ Khi chạy /analyze, Claude sẽ xác định solution type dựa trên input.md
 
 ---
 
+## AI / LLM App
+**Khi nào:** App tích hợp AI model — chatbot, copilot, RAG system, AI agent, AI feature trong app.
+**Preset:** docs/rules/presets/ai-app.md
+**Stack gợi ý:** Next.js + Vercel AI SDK + Anthropic/OpenAI SDK (web) | Python FastAPI + LangChain (API)
+**Skills auto-load:** llm-integration, state-management, security
+**Testing tier:** 2 (unit + manual eval)
+**Output:** Deployable AI application
+**Lưu ý:** RAISE API keys (ANTHROPIC_API_KEY / OPENAI_API_KEY) vào integration-needs.md ngay Phase 1
+
+---
+
 ## Other
 Nếu không khớp type nào, /analyze sẽ:
 1. Mô tả solution type mới

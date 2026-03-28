@@ -54,7 +54,9 @@ Tech stack, architecture, testing approach → xác định trong /analyze dựa
 - CLI/Script → docs/rules/presets/cli.md
 - Automation → docs/rules/presets/automation.md
 - Extension → docs/rules/presets/extension.md
+- AI/LLM App → docs/rules/presets/ai-app.md
 - Precedence khi conflict: universal < preset < task-level instruction
+- Git branching → docs/rules/git-branching.md
 
 ## Testing Approach
 - Code có thể chạy → viết automated tests, coverage > 70%

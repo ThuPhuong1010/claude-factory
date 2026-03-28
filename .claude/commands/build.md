@@ -16,6 +16,12 @@ PER TASK:
    - Tier 3-4: tạo/update docs/testing/test-scenarios.md
 9. Nếu lỗi → check memory/bugs.md → fix → re-test (max 3 lần)
 10. Lint nếu có (xem context/techstack.md)
+10b. SELF-REVIEW trước khi commit (scan diff nhanh):
+    - Không có console.log / debug output còn sót
+    - Không có TODO/FIXME chưa giải quyết trong file vừa sửa
+    - Không có hardcoded secret hoặc test credential
+    - Tier 1: không có failing test bị comment out để pass
+    Nếu phát hiện vấn đề → fix ngay trước khi commit
 11. git commit -m "feat(scope): task description"
 12. Update context/tasks.md → DONE
 12b. CHECKPOINT: nếu (tasks completed this session) % 3 == 0 → update tracklog/active.md ngay

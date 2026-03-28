@@ -15,6 +15,10 @@
 | Cần browser testing | playwright | `claude mcp add playwright` |
 | Cần error monitoring | sentry | `claude mcp add sentry` |
 | Cần project management | asana/jira | `claude mcp add asana` |
+| Cần đọc Notion workspace | notion | `claude mcp add notion` |
+| Cần đọc Google Docs/Drive | google-drive | `claude mcp add google-drive` |
+| Cần đọc Confluence pages | confluence | `claude mcp add --transport http confluence <url>` |
+| Cần Google Calendar | google-calendar | Built-in Claude.ai — không cần setup |
 
 ## Cách setup (chỉ khi đã RAISE và user approve)
 

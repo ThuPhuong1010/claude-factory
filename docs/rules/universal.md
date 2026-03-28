@@ -39,6 +39,13 @@
 - Validate required env vars khi startup, fail fast nếu thiếu
 - Gitignore phải có: .env, .env.local, .env*.local
 
+## Dependencies
+- Version pinning: dùng exact version (`1.2.3`) cho production dependencies
+- Dev dependencies: range ok (`^1.2.3`)
+- Sau khi thêm package mới → ghi lý do vào context/decisions.md
+- Không thêm package nếu có thể dùng built-in hoặc đã có dependency tương tự
+- Chạy `npm audit` / `pip audit` trước khi commit dependency mới
+
 ## Memory Rotation
 - memory/bugs.md có thể accumulate theo thời gian
 - Bug đã được fix và đã qua 2 versions: move entry sang memory/archive/bugs.md

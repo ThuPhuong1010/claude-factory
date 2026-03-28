@@ -42,6 +42,8 @@ claude
 > /handoff      # Kết thúc session, bàn giao cho session sau
 ```
 
+> **Không biết code?** Xem `docs/guides/quickstart-nontech.md` — hướng dẫn từng bước bằng ngôn ngữ đơn giản, không cần kiến thức kỹ thuật.
+
 ---
 
 ## Workflow
@@ -97,13 +99,17 @@ claude-factory/
 │   ├── input.md        # ← VIẾT Ý TƯỞNG VÀO ĐÂY
 │   ├── prd.md          # Generated: Product Requirements
 │   ├── techstack.md    # Generated: Stack + test tier
-│   ├── tasks.md        # Generated: Task list
+│   ├── tasks.md        # Generated: Task list + DoD
 │   └── decisions.md    # Decisions Claude tự đưa ra
 ├── docs/
+│   ├── guides/
+│   │   ├── quickstart-nontech.md  # ← Bắt đầu tại đây nếu không biết code
+│   │   └── how-to-run.md          # Generated: Hướng dẫn dùng output
 │   ├── rules/
 │   │   ├── universal.md        # Rules áp dụng mọi solution
+│   │   ├── git-branching.md    # Branching strategy
 │   │   ├── presets/            # Rules theo solution type
-│   │   │   ├── web.md
+│   │   │   ├── web.md          # Next.js + DB migration
 │   │   │   ├── cli.md
 │   │   │   ├── automation.md
 │   │   │   └── extension.md
@@ -113,14 +119,17 @@ claude-factory/
 ├── memory/             # Persistent learning
 │   ├── bugs.md         # Bug patterns + fixes
 │   ├── errors.md       # Error patterns
-│   └── patterns.md     # Good patterns
+│   ├── patterns.md     # Good patterns
+│   └── archive/        # Bugs đã fix > 2 versions (rotation)
 ├── tracklog/           # Session tracking
 │   ├── active.md       # Trạng thái hiện tại
 │   └── handoff.md      # Bàn giao giữa sessions
 ├── variants/           # Idea variant testing
-├── templates/          # PRD template, setup guides
+├── templates/          # PRD, how-to-run, .env, setup guides
 │   ├── prd.md
-│   └── setup-github.md
+│   ├── how-to-run.md   # Template cho docs/guides/how-to-run.md
+│   ├── .env.example    # Environment variables template
+│   └── setup-github.md # Windows GitHub setup guide
 ├── versions/           # Version history
 ├── CLAUDE.md           # Instructions cho Claude (auto-loaded)
 └── AGENTS.md           # Cross-agent rules
@@ -143,6 +152,9 @@ claude-factory/
 | `/handoff` | Kết thúc session + tạo handoff note |
 | `/sync` | Sync context files với code hiện tại |
 | `/deploy-check` | Checklist trước khi deploy |
+| `/worktree` | Quản lý parallel mode — setup/sync/merge/teardown worktree cho 2 agents |
+
+> **Tip:** Không cần command đặc biệt để hỏi Claude giải thích. Hỏi thẳng trong chat: *"Giải thích đoạn code này làm gì?"* hoặc *"Tại sao mày chọn cách này?"* — Claude sẽ giải thích bằng tiếng Việt đơn giản.
 
 ---
 
@@ -208,12 +220,17 @@ So với load-all (~15,000+ tokens): **tiết kiệm ~78%**.
 
 ## Setup mới từ đầu
 
-Xem `templates/setup-github.md` để có hướng dẫn đầy đủ:
+**Không biết code → bắt đầu tại:** `docs/guides/quickstart-nontech.md`
+
+**Có kiến thức IT → Windows setup:** `templates/setup-github.md`
 - Cài GitHub CLI trên Windows
 - PowerShell syntax (`&` operator)
 - Fix PATH trong Git Bash
 - `bypassPermissions` config
 - Windows notification hook
+
+> ⚠️ `.claude/settings.json` dùng `bypassPermissions` — chỉ dùng local, không share file này.
+> Khi distribute template: đổi `defaultMode` thành `"default"` trước. Xem `docs/rules/security.md`.
 
 ---
 

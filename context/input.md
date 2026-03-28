@@ -22,3 +22,11 @@
 ## Constraints
 <!-- Giới hạn về: ngôn ngữ, OS, budget, timeline, stack bắt buộc, ... -->
 -
+
+## Context Files
+<!-- Có file ngoài text không? Đặt vào context/ rồi list path tại đây -->
+<!-- ✅ Đọc trực tiếp : .md .txt .json .pdf .png .jpg .svg          -->
+<!-- ⚙️  Cần convert   : .docx .xlsx .pptx → chạy /skill context-ingestion  -->
+<!-- 🎙️  Audio/Video   : transcribe trước → lưu .txt vào context/           -->
+<!-- 🔗  Figma/Notion  : xem docs/rules/mcp.md                              -->
+-
