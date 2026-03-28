@@ -1,4 +1,4 @@
-# AI SDLC Factory
+# Claude Factory
 
 ## Commands
 npm run dev | npm test | npm run lint | npm run build

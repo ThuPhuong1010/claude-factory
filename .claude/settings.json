@@ -4,13 +4,22 @@
       "Bash(*)",
       "Read",
       "Write",
-      "Edit"
+      "Edit",
+      "Glob",
+      "Grep",
+      "WebFetch",
+      "WebSearch",
+      "mcp__*",
+      "Agent"
     ],
+    "defaultMode": "bypassPermissions",
     "deny": [
       "Bash(rm -rf /)",
       "Bash(rm -rf ~)",
       "Bash(sudo *)",
-      "Bash(format *)"
+      "Bash(format *)",
+      "Bash(git push --force*)",
+      "Bash(git push -f *)"
     ]
   }
 }
