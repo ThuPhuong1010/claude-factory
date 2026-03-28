@@ -1,25 +1,27 @@
 # Claude Factory
 
-> Hiện thực hóa bất kỳ ý tưởng nào — với Claude Code làm engineering co-pilot.
+> Từ ý tưởng → solution hoàn chỉnh — với Claude Code làm engineering co-pilot.
 
-Claude Factory là một project template giúp bạn đi từ ý tưởng đến solution hoàn chỉnh một cách có cấu trúc. **Không giới hạn tech stack hay loại output** — web app, CLI tool, automation workflow, extension, script, process design, hay bất cứ thứ gì. Claude sẽ chọn stack phù hợp với idea, không phải ngược lại.
+Claude Factory là project template giúp bạn build **bất kỳ loại software nào** một cách có cấu trúc. Không bị lock vào tech stack cụ thể — Claude phân tích ý tưởng, chọn stack phù hợp, tự build và test. Bạn chỉ cần mô tả vấn đề muốn giải quyết.
 
 ---
 
 ## Có thể build gì?
 
-| Solution Type | Ví dụ |
-|--------------|-------|
-| Web App | SaaS dashboard, admin panel, landing page |
-| CLI Tool | File processor, code generator, dev utility |
-| Automation / Workflow | n8n flow, scheduled bot, integration pipeline |
-| VSCode Extension | Snippet tool, code reviewer, sidebar widget |
-| Browser Extension | Page modifier, productivity tool, scraper |
-| API / Service | REST API, webhook handler, microservice |
-| Script / Bot | Telegram bot, data processor, scraper |
-| Process Design | SOP, runbook, system design document |
-| Desktop App | Electron app, system tray tool |
-| *Bất cứ thứ gì khác* | Claude tự định nghĩa approach phù hợp |
+| Solution Type | Ví dụ cụ thể |
+|--------------|-------------|
+| **Web App / SaaS** | Dashboard, admin panel, landing page, CRM |
+| **AI / LLM App** | Chatbot, AI writing tool, document Q&A, image analyzer |
+| **CLI Tool** | File processor, code generator, dev utility, data converter |
+| **Automation / Workflow** | n8n flow, scheduled bot, integration pipeline, email automation |
+| **API / Service** | REST API, webhook handler, microservice, scraper |
+| **Script / Bot** | Telegram bot, data processor, report generator |
+| **VSCode Extension** | Snippet tool, code reviewer, sidebar widget |
+| **Browser Extension** | Page modifier, productivity tool, content injector |
+| **Desktop App** | Electron app, system tray tool, file manager |
+| **Mobile App** | React Native app, Expo project |
+| **Process / Docs** | SOP, runbook, system design, technical documentation |
+| **Bất cứ thứ gì khác** | Claude tự định nghĩa approach phù hợp |
 
 ---
 
@@ -35,126 +37,91 @@ claude
 
 # 3. Viết idea vào context/input.md
 # 4. Bắt đầu
-> /variants     # Test 2-3 approaches khác nhau → chọn hướng đi
-> /analyze      # Claude phân tích → chọn stack → tạo PRD + tasks
-> /build        # Build từng task tự động
+> /analyze      # Phân tích idea → propose solutions → tạo PRD + tasks
+> /build        # Build từng task tự động, không hỏi lại
 > /test         # Test theo loại solution
 > /handoff      # Kết thúc session, bàn giao cho session sau
 ```
 
-> **Không biết code?** Xem `docs/guides/quickstart-nontech.md` — hướng dẫn từng bước bằng ngôn ngữ đơn giản, không cần kiến thức kỹ thuật.
+> **Không biết code?** Xem [`docs/guides/quickstart-nontech.md`](docs/guides/quickstart-nontech.md) — hướng dẫn 5 bước bằng ngôn ngữ đơn giản.
 
 ---
 
 ## Workflow
 
 ```
-context/input.md (ý tưởng của bạn)
-        ↓
-   /variants → chọn approach
-        ↓
-   /analyze → xác định solution type → chọn stack → tạo tasks
-        ↓
-   /build → build từng task (tự động, không hỏi lại)
-        ↓
-   /test → test theo tier (automated / manual / scenarios)
-        ↓
-   /review → code review
-        ↓
-   /handoff → bàn giao cho session tiếp
+context/input.md  (mô tả ý tưởng)
+       ↓
+  /variants  → so sánh 2-3 approaches khác nhau
+       ↓
+  /analyze   → DISCOVER → PROPOSE solutions → GENERATE plan + PRD + tasks
+       ↓
+  /build     → autonomous loop: code → test → fix → commit (không hỏi lại)
+       ↓
+  /test      → 4-tier testing phù hợp với solution type
+       ↓
+  /review    → code review + design checklist
+       ↓
+  /handoff   → verify clean state → bàn giao cho session tiếp
 ```
 
-### Decision Making
-- Sau khi plan approved: Claude **tự quyết định mọi thứ**, không hỏi lại
-- Không chắc → chọn option phổ biến, log vào `context/decisions.md`
-- Cần external service → RAISE vào `docs/reports/integration-needs.md`
-- Bug không fix được sau 3 lần → log `[NEEDS_HUMAN]`, chuyển task tiếp
+**Sau khi plan approved:** Claude tự quyết định mọi thứ — không hỏi lại.
+- Uncertain? → Chọn option phổ biến, log vào `context/decisions.md`
+- Cần external service? → RAISE vào `docs/reports/integration-needs.md`
+- Bug không fix được sau 3 lần? → Log `[NEEDS_HUMAN]`, chuyển task tiếp
 
 ---
 
-## Testing — Mọi Loại Solution
-
-Template hỗ trợ 4 tier testing để cover mọi loại output:
-
-| Tier | Khi nào | Approach |
-|------|---------|----------|
-| **1** | Code chạy được, test tự động | Jest, pytest, go test... coverage > 70% |
-| **2** | Cần môi trường đặc biệt (extension, desktop) | Unit tests + manual checklist |
-| **3** | Không chạy trực tiếp (workflow, automation) | Test scenarios + dry-run guide |
-| **4** | Documentation / process | Review checklist + walkthrough |
-
-Xem `docs/rules/testing-strategy.md` để biết chi tiết.
-
----
-
-## Project Structure
-
-```
-claude-factory/
-├── .claude/
-│   ├── commands/       # /analyze /build /test /variants /review ...
-│   ├── rules/          # Auto-load rules theo file type
-│   └── skills/         # Domain knowledge (lazy-loaded)
-├── context/            # Shared context mỗi session
-│   ├── input.md        # ← VIẾT Ý TƯỞNG VÀO ĐÂY
-│   ├── prd.md          # Generated: Product Requirements
-│   ├── techstack.md    # Generated: Stack + test tier
-│   ├── tasks.md        # Generated: Task list + DoD
-│   └── decisions.md    # Decisions Claude tự đưa ra
-├── docs/
-│   ├── guides/
-│   │   ├── quickstart-nontech.md  # ← Bắt đầu tại đây nếu không biết code
-│   │   └── how-to-run.md          # Generated: Hướng dẫn dùng output
-│   ├── rules/
-│   │   ├── universal.md        # Rules áp dụng mọi solution
-│   │   ├── git-branching.md    # Branching strategy
-│   │   ├── presets/            # Rules theo solution type
-│   │   │   ├── web.md          # Next.js + DB migration
-│   │   │   ├── cli.md
-│   │   │   ├── automation.md
-│   │   │   └── extension.md
-│   │   └── testing-strategy.md # Testing tiers guide
-│   ├── solution-types.md       # Catalog các loại solution
-│   └── reports/                # integration-needs, qa-report
-├── memory/             # Persistent learning
-│   ├── bugs.md         # Bug patterns + fixes
-│   ├── errors.md       # Error patterns
-│   ├── patterns.md     # Good patterns
-│   └── archive/        # Bugs đã fix > 2 versions (rotation)
-├── tracklog/           # Session tracking
-│   ├── active.md       # Trạng thái hiện tại
-│   └── handoff.md      # Bàn giao giữa sessions
-├── variants/           # Idea variant testing
-├── templates/          # PRD, how-to-run, .env, setup guides
-│   ├── prd.md
-│   ├── how-to-run.md   # Template cho docs/guides/how-to-run.md
-│   ├── .env.example    # Environment variables template
-│   └── setup-github.md # Windows GitHub setup guide
-├── versions/           # Version history
-├── CLAUDE.md           # Instructions cho Claude (auto-loaded)
-└── AGENTS.md           # Cross-agent rules
-```
-
----
-
-## Commands
+## Commands (14)
 
 | Command | Mô tả |
 |---------|-------|
-| `/variants` | Test 2-3 approaches khác nhau trước khi chọn hướng đi |
-| `/analyze` | Phân tích idea → chọn stack → tạo PRD + tasks |
+| `/variants` | So sánh 2-3 approaches trước khi chọn hướng đi |
+| `/analyze` | Phân tích idea → propose solutions → tạo PRD + tasks + how-to-run |
 | `/plan` | Lập kế hoạch chi tiết cho task tiếp theo |
-| `/build` | Build tự động — không hỏi lại, tự quyết định |
+| `/build` | Build tự động — không hỏi lại, self-review trước mỗi commit |
 | `/test` | Test theo tier phù hợp với solution type |
-| `/review` | Code review tất cả changed files |
-| `/fix` | Fix bug (max 3 attempts, sau đó log NEEDS_HUMAN) |
-| `/status` | Xem trạng thái hiện tại |
-| `/handoff` | Kết thúc session + tạo handoff note |
+| `/review` | Code review + design checklist |
+| `/fix` | Fix bug (max 3 attempts → log NEEDS_HUMAN) |
+| `/status` | Xem trạng thái session hiện tại |
+| `/handoff` | Kết thúc session — verify clean state + tạo handoff note |
 | `/sync` | Sync context files với code hiện tại |
-| `/deploy-check` | Checklist trước khi deploy |
-| `/worktree` | Quản lý parallel mode — setup/sync/merge/teardown worktree cho 2 agents |
+| `/deploy-check` | Pre-deployment checklist |
+| `/push` | Kiểm tra commits chưa push → push sau khi confirm |
+| `/discover` | Làm rõ ý tưởng mơ hồ qua câu hỏi có cấu trúc |
+| `/worktree` | Parallel mode: setup/sync/merge/teardown worktree cho 2 agents |
 
-> **Tip:** Không cần command đặc biệt để hỏi Claude giải thích. Hỏi thẳng trong chat: *"Giải thích đoạn code này làm gì?"* hoặc *"Tại sao mày chọn cách này?"* — Claude sẽ giải thích bằng tiếng Việt đơn giản.
+> **Tip:** Hỏi thẳng trong chat để Claude giải thích: *"Tại sao mày chọn cách này?"*, *"Giải thích đoạn code này cho tao hiểu"* — Claude trả lời bằng tiếng Việt.
+
+---
+
+## Testing — 4 Tiers
+
+| Tier | Khi nào | Cách test |
+|------|---------|----------|
+| **1** | Code có thể chạy tự động | Jest / pytest / go test — coverage > 70% |
+| **2** | Cần môi trường đặc biệt | Unit tests + manual checklist |
+| **3** | Không chạy trực tiếp (workflow, n8n) | Test scenarios + dry-run guide |
+| **4** | Documentation / process | Review checklist + walkthrough |
+
+---
+
+## Skills (36 — lazy-loaded)
+
+Chỉ load khi cần, tiết kiệm context. Mỗi skill = domain knowledge pack:
+
+| Nhóm | Skills |
+|------|--------|
+| **Frontend** | `ant-design`, `nextjs-app-router`, `state-management`, `i18n` |
+| **Backend** | `api-design`, `database`, `orm`, `auth`, `real-time`, `search` |
+| **AI/LLM** | `llm-integration` |
+| **Infrastructure** | `docker`, `ci-cd`, `monitoring`, `file-storage` |
+| **Payments & Comms** | `payment`, `email` |
+| **Solution-specific** | `browser-extension`, `vscode-extension`, `desktop-app`, `mobile-app` |
+| **Data** | `spreadsheet`, `document-generation`, `data-visualization`, `presentations` |
+| **Dev** | `error-handling`, `security`, `testing`, `python-scripting` |
+| **Automation** | `workflow-automation`, `cron-scheduler` |
+| **Utilities** | `context-ingestion` (PDF, docx, audio → context) |
 
 ---
 
@@ -163,42 +130,74 @@ claude-factory/
 Claude tự học qua từng session — không lặp lại lỗi cũ:
 
 ```
-memory/bugs.md      # Bug đã gặp + root cause + fix
-memory/errors.md    # Error patterns
-memory/patterns.md  # Good patterns được phát hiện
+memory/bugs.md       # Bug đã gặp → root cause + fix + prevention
+memory/errors.md     # Error patterns (Wrong vs Right)
+memory/patterns.md   # Good patterns được validate
+memory/archive/      # Bugs cũ đã fix > 2 versions (rotation)
 ```
 
-Claude **đọc memory trước khi code** mỗi session.
+Claude **đọc memory trước khi code** mỗi session. Sau 20+ entries → auto-archive entries cũ.
 
 ---
 
-## Skills (Lazy-loaded)
+## Multi-Agent Support
 
-Chỉ load khi cần, tiết kiệm context tokens:
-
-| Skill | Load khi |
-|-------|---------|
-| `ant-design` | Viết React components, forms, tables |
-| `nextjs-app-router` | Pages, layouts, API routes |
-| `api-design` | API endpoints, REST patterns |
-| `database` | Schema design, models |
-| `error-handling` | Async code, API calls |
-| `security` | Auth, input handling |
-| `testing` | Tests, debugging |
-
----
-
-## MCP Integration
-
-Không setup mặc định — chỉ add khi cần (tốn context tokens):
+Hỗ trợ 2 AI agents làm việc song song trên cùng repo (Claude + Antigravity):
 
 ```bash
-claude mcp add figma                              # Figma designs
-claude mcp add --transport http github <url>     # GitHub issues/PR
-claude mcp add playwright                         # Browser testing
+/worktree setup      # Tạo worktree riêng cho agent thứ 2
+/worktree sync       # Xem diff giữa 2 agents
+/worktree merge      # Merge work của 2 agents
+/worktree teardown   # Kết thúc parallel mode
 ```
 
-Xem `docs/rules/mcp.md` để biết chi tiết + quy trình RAISE.
+- File ownership zones rõ ràng (Backend / Frontend / Shared)
+- Lock mechanism tránh conflict
+- Auto-detect signal cần parallel mode khi session start
+
+---
+
+## Project Structure
+
+```
+claude-factory/
+├── .claude/
+│   ├── commands/        # 14 commands (analyze, build, test, worktree...)
+│   ├── rules/           # Auto-load theo file type (ts, tsx, api, test...)
+│   └── skills/          # 36 domain knowledge packs (lazy-loaded)
+├── context/             # Shared context mỗi session
+│   ├── input.md         # ← VIẾT Ý TƯỞNG VÀO ĐÂY
+│   ├── techstack.md     # Generated: Stack + testing tier
+│   ├── tasks.md         # Generated: Task list + DoD
+│   ├── prd.md           # Generated: Product Requirements
+│   ├── architecture.md  # Generated: Cấu trúc + diagram
+│   └── decisions.md     # ADR: decisions Claude tự đưa ra
+├── docs/
+│   ├── guides/
+│   │   ├── quickstart-nontech.md  # ← Bắt đầu đây nếu không biết code
+│   │   └── how-to-run.md          # Generated: Hướng dẫn dùng output
+│   ├── rules/
+│   │   ├── universal.md           # Rules áp dụng mọi solution
+│   │   ├── git-branching.md       # Branching strategy
+│   │   ├── security.md            # Security + bypassPermissions warning
+│   │   └── presets/               # Rules theo solution type
+│   │       ├── web.md             # Next.js + DB migration
+│   │       ├── ai-app.md          # LLM app + cost control + prompt safety
+│   │       ├── cli.md
+│   │       ├── automation.md
+│   │       └── extension.md
+│   ├── testing/
+│   │   └── test-scenarios.md      # Template cho Tier 3-4 testing
+│   └── reports/                   # integration-needs, qa-report
+├── memory/              # Persistent learning (cross-session)
+├── tracklog/            # Session state + handoff notes
+├── templates/           # PRD, how-to-run, .env.example, setup-github
+├── variants/            # Approach variant comparison
+├── versions/            # Version history
+├── .gitignore           # Covers Node, Python, mobile, extension artifacts
+├── CLAUDE.md            # Auto-loaded instructions cho Claude
+└── AGENTS.md            # Multi-agent coordination rules
+```
 
 ---
 
@@ -206,31 +205,40 @@ Xem `docs/rules/mcp.md` để biết chi tiết + quy trình RAISE.
 
 | Component | ~Tokens |
 |-----------|---------|
-| CLAUDE.md | ~1,200 |
-| Skills metadata | ~350 |
+| CLAUDE.md | ~1,500 |
+| Skills metadata | ~500 |
 | context/tasks.md | ~500 |
 | tracklog/active.md | ~300 |
 | memory/bugs.md | ~200 |
 | 1 skill SKILL.md | ~800 |
-| **Total per task** | **~3,350** |
+| **Total per task** | **~3,800** |
 
-So với load-all (~15,000+ tokens): **tiết kiệm ~78%**.
+So với load-all 36 skills (~20,000+ tokens): **tiết kiệm ~80%** nhờ lazy-loading.
 
 ---
 
-## Setup mới từ đầu
+## MCP Integration
 
-**Không biết code → bắt đầu tại:** `docs/guides/quickstart-nontech.md`
+Không setup mặc định — chỉ add khi cần (mỗi server tốn ~100-200 tokens):
 
-**Có kiến thức IT → Windows setup:** `templates/setup-github.md`
-- Cài GitHub CLI trên Windows
-- PowerShell syntax (`&` operator)
-- Fix PATH trong Git Bash
-- `bypassPermissions` config
-- Windows notification hook
+```bash
+claude mcp add figma                              # Figma designs
+claude mcp add --transport http github <url>      # GitHub issues/PR
+claude mcp add playwright                          # Browser testing
+claude mcp add postgres                            # Query database
+```
 
-> ⚠️ `.claude/settings.json` dùng `bypassPermissions` — chỉ dùng local, không share file này.
-> Khi distribute template: đổi `defaultMode` thành `"default"` trước. Xem `docs/rules/security.md`.
+RAISE trong `docs/reports/integration-needs.md` trước khi add. Xem `docs/rules/mcp.md`.
+
+---
+
+## Setup
+
+**Không biết code →** [`docs/guides/quickstart-nontech.md`](docs/guides/quickstart-nontech.md)
+
+**Windows setup (GitHub CLI, hooks) →** [`templates/setup-github.md`](templates/setup-github.md)
+
+> ⚠️ `.claude/settings.json` dùng `bypassPermissions` — chỉ dùng local, **không commit/share** file này khi distribute template. Đổi `defaultMode` thành `"default"` trước. Xem [`docs/rules/security.md`](docs/rules/security.md).
 
 ---
 
