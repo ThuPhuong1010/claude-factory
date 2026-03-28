@@ -18,6 +18,13 @@ Web App | CLI Tool | Automation/Workflow | VSCode Extension | Browser Extension 
 
 Tech stack, architecture, testing approach → xác định trong /analyze dựa trên solution type.
 
+## Git Rules (BẮT BUỘC)
+- `git commit` local → tự động, không hỏi
+- `git push` remote → KHÔNG BAO GIỜ tự chạy. Phải hỏi user trước:
+  "Tao có X commits chưa push. Push lên remote không?"
+  Chỉ push sau khi user confirm trong conversation. Không push im lặng.
+- Nếu không có lệnh push rõ ràng từ user → chỉ commit local, báo trạng thái
+
 ## Rules (universal — always apply)
 - Max 300 lines/file, 50 lines/function
 - Naming: rõ ràng, nhất quán trong codebase
