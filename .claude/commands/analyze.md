@@ -15,6 +15,7 @@ Chạy theo 3 phases. KHÔNG bỏ qua phase nào.
 - Đã có solution nào chưa? Vì sao chưa đủ?
 - Phần nào quan trọng nhất nếu chỉ được làm 1 thứ?
 - Dữ liệu đầu vào là gì? Output format cần là gì?
+- **Có tool AI khác (Antigravity) làm việc song song không?** → Nếu có, tao sẽ tự setup worktree để 2 agents không conflict.
 
 **Format hỏi:**
 ```
@@ -28,6 +29,10 @@ Tao cần làm rõ thêm một số điểm trước khi propose solution:
 ```
 
 Nếu ý tưởng đã đủ rõ → SKIP phase 1, đi thẳng phase 2.
+
+**Xử lý câu trả lời về multi-agent:**
+- Nếu user nói CÓ Antigravity → chạy `/worktree setup` ngay sau khi DISCOVER xong, trước khi PROPOSE.
+- Nếu user nói KHÔNG → tiếp tục bình thường.
 
 ---
 

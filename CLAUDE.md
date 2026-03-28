@@ -7,11 +7,28 @@ Hiện thực hóa bất kỳ ý tưởng nào — web app, CLI tool, automation
 Xác định sau khi biết tech stack. Mặc định: xem context/techstack.md.
 
 ## Workflow
-1. Read context/tasks.md → find next TODO task
-2. Read tracklog/active.md → know current state
+1. Read tracklog/active.md → know current state + check PARALLEL MODE
+2. Read context/tasks.md → find next TODO task
 3. Read memory/bugs.md → avoid known issues
 4. Build → Test → Fix → Commit → Update task status
 5. After session: update tracklog/active.md
+
+## Parallel Mode Auto-Detection (chạy mỗi session start)
+Sau khi đọc tracklog/active.md, kiểm tra các signals sau:
+- PARALLEL MODE đang là gì (ON/OFF)?
+- context/tasks.md có task nào gán cho Antigravity không?
+- context/input.md có đề cập "Antigravity", "song song", "parallel", "hai tool" không?
+- User có nhắc đến việc dùng tool AI khác không?
+
+**Nếu phát hiện signal VÀ PARALLEL MODE: OFF:**
+→ Chủ động thông báo ngay (không chờ user hỏi):
+"Tao thấy project này có vẻ cần 2 agents làm việc song song ([signal cụ thể]).
+Muốn tao bật Parallel Mode (git worktree) không? Chạy /worktree setup là xong."
+
+**Không cần thông báo nếu:**
+- PARALLEL MODE: ON (đã bật rồi)
+- Không có signal nào
+- Project chỉ có 1 agent
 
 ## Solution Types
 Web App | CLI Tool | Automation/Workflow | VSCode Extension | Browser Extension | Script/Bot | Process Design | Documentation System | API/Service | Desktop App | Mobile App | Other
@@ -37,6 +54,7 @@ Tech stack, architecture, testing approach → xác định trong /analyze dựa
 - CLI/Script → docs/rules/presets/cli.md
 - Automation → docs/rules/presets/automation.md
 - Extension → docs/rules/presets/extension.md
+- Precedence khi conflict: universal < preset < task-level instruction
 
 ## Testing Approach
 - Code có thể chạy → viết automated tests, coverage > 70%

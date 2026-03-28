@@ -18,6 +18,7 @@ PER TASK:
 10. Lint nếu có (xem context/techstack.md)
 11. git commit -m "feat(scope): task description"
 12. Update context/tasks.md → DONE
+12b. CHECKPOINT: nếu (tasks completed this session) % 3 == 0 → update tracklog/active.md ngay
 13. Loop to next TODO task
 
 SESSION END:

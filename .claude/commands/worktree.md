@@ -3,6 +3,25 @@ Chỉ dùng khi có 2+ agents làm việc đồng thời (Claude + Antigravity).
 
 ---
 
+## Auto-Detection (chạy khi không có subcommand)
+
+Nếu user chạy `/worktree` không có subcommand, hoặc Claude phát hiện signal từ `SessionStart` hook:
+
+1. Đọc `tracklog/active.md` → check `PARALLEL MODE`
+2. Nếu `PARALLEL MODE: OFF`, kiểm tra:
+   - `context/tasks.md` có chứa "Antigravity" không?
+   - `context/input.md` có chứa "Antigravity", "song song", "parallel", "hai tool" không?
+3. Nếu có signal → thông báo và hỏi:
+   ```
+   Tao thấy project này có vẻ cần 2 agents làm việc song song ([signal cụ thể]).
+   Muốn tao bật Parallel Mode (git worktree) không?
+   → Nhắn "có" hoặc "setup" là tao làm ngay.
+   ```
+4. Nếu user đồng ý → chạy `/worktree setup` tự động
+5. Nếu không có signal → báo "Không thấy signal cần parallel mode. Nếu muốn bật thủ công: /worktree setup"
+
+---
+
 ## /worktree setup
 
 Khởi tạo worktree cho agent thứ 2.
