@@ -1,29 +1,41 @@
 # Claude Factory
 
-## Commands
-npm run dev | npm test | npm run lint | npm run build
+## Mission
+Hiện thực hóa bất kỳ ý tưởng nào — web app, CLI tool, automation workflow, extension, script, process design, hay bất cứ thứ gì khác. Tech stack được chọn theo solution, không phải ngược lại.
 
-## Architecture
-Next.js 15 App Router + Ant Design 5.x + TypeScript + Zustand + TanStack Query.
-UI: Ant Design components only. No custom UI libs.
-Structure: src/{app,components,hooks,lib,services,stores,types}
+## Commands
+Xác định sau khi biết tech stack. Mặc định: xem context/techstack.md.
 
 ## Workflow
 1. Read context/tasks.md → find next TODO task
 2. Read tracklog/active.md → know current state
 3. Read memory/bugs.md → avoid known issues
-4. Code → Test → Fix → Commit → Update task status
+4. Build → Test → Fix → Commit → Update task status
 5. After session: update tracklog/active.md
 
-## Rules (auto-loaded from .claude/rules/)
-- TypeScript strict. No `any`.
+## Solution Types
+Web App | CLI Tool | Automation/Workflow | VSCode Extension | Browser Extension | Script/Bot | Process Design | Documentation System | API/Service | Desktop App | Mobile App | Other
+
+Tech stack, architecture, testing approach → xác định trong /analyze dựa trên solution type.
+
+## Rules (universal — always apply)
 - Max 300 lines/file, 50 lines/function
-- Ant Design components for ALL UI. No custom replacements.
-- Validate client (Form rules) + server (Zod)
-- Every async has try-catch. No empty catches.
-- No console.log in production. No hardcoded secrets.
-- Test every feature. Coverage > 70%.
+- Naming: rõ ràng, nhất quán trong codebase
+- Every async has error handling. No empty catches.
+- No hardcoded secrets. No debug output in production.
 - Commit: type(scope): description
+
+## Rules (conditional — load từ docs/rules/presets/ theo solution type)
+- Web App → docs/rules/presets/web.md
+- CLI/Script → docs/rules/presets/cli.md
+- Automation → docs/rules/presets/automation.md
+- Extension → docs/rules/presets/extension.md
+
+## Testing Approach
+- Code có thể chạy → viết automated tests, coverage > 70%
+- Code không thể chạy trực tiếp → tạo docs/testing/test-scenarios.md với manual test scripts
+- Workflow/process → định nghĩa success criteria + dry-run checklist
+- Xem docs/rules/testing-strategy.md để biết thêm
 
 ## Decision Making
 - After plan is approved: NO asking user. Self-decide everything.
@@ -36,7 +48,7 @@ Available in .claude/skills/. Auto-triggered by context.
 Read SKILL.md first, then references/ only if needed.
 
 ## Memory (Continuous Learning)
-- New bug? Append to memory/bugs.md with: symptom + cause + fix + prevention
+- New bug? Append to memory/bugs.md: symptom + cause + fix + prevention
 - Found error pattern? Append to memory/errors.md
 - Good pattern? Append to memory/patterns.md
 - READ memory/ BEFORE coding to avoid repeating mistakes

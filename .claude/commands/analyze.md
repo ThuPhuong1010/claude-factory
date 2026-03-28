@@ -1,21 +1,24 @@
-Phân tích yêu cầu phần mềm và tạo plan đầy đủ.
+Phân tích ý tưởng trong context/input.md → tạo đầy đủ context để build.
 
-Steps:
-1. Read context/input.md
-2. Scan docs/rules/ headings (deep-read only relevant ones)
-3. Create context/prd.md — full PRD with acceptance criteria per feature
-4. Create context/techstack.md — justify each technology choice
-5. Create context/architecture.md — module boundaries + mermaid diagram
-6. Create context/tasks.md — task breakdown with:
+1. Đọc context/input.md — hiểu ý tưởng
+2. Xác định Solution Type:
+   Web App | CLI Tool | Automation/Workflow | VSCode Extension |
+   Browser Extension | Script/Bot | Process Design | API/Service |
+   Desktop App | Documentation System | Other
+3. Đề xuất Tech Stack phù hợp + giải thích lý do → ghi context/techstack.md
+4. Load rules:
+   - docs/rules/universal.md (luôn đọc)
+   - docs/rules/presets/{type}.md (theo solution type)
+5. Xác định Testing Tier (1-4) từ docs/rules/testing-strategy.md → ghi vào context/techstack.md
+6. Tạo context/prd.md từ templates/prd.md
+7. Tạo context/architecture.md — cấu trúc solution + mermaid diagram
+8. Tạo context/tasks.md — task list:
    - ID (TASK-001), Title, Description
    - Acceptance Criteria
    - Dependencies [TASK-XXX]
-   - Effort: S/M/L
-   - Status: TODO
-   - Version: v0.1.0
-7. If needs external service → write docs/reports/integration-needs.md
-8. Create versions/v0.1.0.md + versions/current.md
-9. Print summary for user review
+   - Effort: S/M/L | Status: TODO | Version: v0.1.0
+9. Nếu cần external service → RAISE vào docs/reports/integration-needs.md
+10. Tạo versions/v0.1.0.md + versions/current.md
+11. Tóm tắt: solution type, stack, testing tier, số tasks
 
-IMPORTANT: Group tasks into v0.1.0 (MVP — smallest viable scope).
-Defer nice-to-haves to v0.2.0+.
+IMPORTANT: MVP = nhỏ nhất có thể verify được ý tưởng. Defer nice-to-haves sang v0.2.0+.
