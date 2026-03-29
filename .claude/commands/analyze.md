@@ -70,14 +70,51 @@ Nếu ý tưởng đã đủ rõ → SKIP phase 1, đi thẳng phase 2.
 
 ## PHASE 2: PROPOSE SOLUTIONS (sau khi đủ context)
 
-Đề xuất 2-3 solutions khả thi. Mỗi solution gồm:
+### Bước 2a — Solution Spectrum (chạy TRƯỚC khi propose)
+
+Evaluate từ thấp lên cao, dừng ở level thấp nhất giải quyết được vấn đề:
+
+```
+Level 0 — Existing SaaS/tool     → Notion, Airtable, Google Sheets, Trello, ...
+Level 1 — Configure/integrate    → Zapier, Make, IFTTT, Gmail filter, Slack workflow
+Level 2 — No-code platform       → n8n, Bubble, Webflow, Glide, AppSheet
+Level 3 — Light script (~50 dòng)→ Python/bash script chạy thủ công hoặc cron
+Level 4 — Full custom build      → App với DB, auth, UI hoàn chỉnh
+```
+
+**Quy tắc:** Không mặc định Level 4. Nếu Level 0-2 giải quyết được → recommend đó, giải thích tại sao không cần build thêm.
+
+**WebSearch (chạy tự động):**
+Trước khi propose, search để verify:
+- Existing tools đang solve vấn đề này như thế nào
+- Pricing/availability của tools sẽ recommend
+- Gotchas / limitations thực tế người dùng hay gặp
+
+```
+Search queries nên dùng:
+- "[problem domain] tools [year]"
+- "[tool name] pricing free tier"
+- "[tool name] limitations alternatives"
+```
+
+Sau search, note lại: *"Tao đã check: [tên tool] free tier có X, [tool] giới hạn Y"*
+
+---
+
+### Bước 2b — Đề xuất 2-3 solutions
+
+Bao gồm ít nhất 1 solution ở level thấp (no-code/low-code) nếu khả thi.
+
+Mỗi solution gồm:
 
 ```
 ### Solution [A/B/C]: [Tên gợi nhớ]
+**Level:** [0-4 — Existing tool / Configure / No-code / Script / Full build]
 **Mô tả:** 1-2 câu tóm tắt approach
-**Stack:** [tech stack cụ thể]
+**Stack/Tool:** [tech stack hoặc tên platform cụ thể]
 **Output:** [người dùng nhận được gì]
 **Effort:** [S = <1 ngày | M = 2-5 ngày | L = 1-2 tuần | XL = >2 tuần]
+**Chi phí ước tính:** [free / ~$X/tháng / one-time]
 
 **Ưu điểm:**
 - ...
@@ -92,14 +129,14 @@ Sau đó tạo bảng so sánh:
 
 | Tiêu chí | Solution A | Solution B | Solution C |
 |---------|-----------|-----------|-----------|
+| Level | | | |
+| Effort đến MVP | | | |
+| Chi phí | | | |
 | Độ phức tạp | | | |
-| Time to MVP | | | |
 | Khả năng mở rộng | | | |
-| Dễ maintain | | | |
-| Rủi ro kỹ thuật | | | |
 | Phù hợp với yêu cầu | | | |
 
-**Recommendation:** [Solution nào tao recommend + lý do ngắn gọn]
+**Recommendation:** [Solution nào tao recommend + lý do ngắn gọn. Nếu có solution no-code khả thi → nói rõ "không cần build code vì..."]
 
 ```
 → Mày chọn solution nào? (A/B/C hoặc mix)

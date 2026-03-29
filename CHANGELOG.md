@@ -5,6 +5,28 @@ Format: `[vX.Y.Z] YYYY-MM-DD — mô tả ngắn`
 
 ---
 
+## [v0.4.0] 2026-03-29 — Proactive solution recommendation + real-time research
+
+### Added
+- `/research` command (command #15) — research real-time: tools, pricing, best practices
+  - WebSearch tự động với 3-5 queries bao phủ landscape + pricing + gotchas
+  - Output: options table, per-option detail, recommendation by use case, sources
+  - Suggest next steps sau research (compare deeper / generate setup guide / /analyze)
+
+### Improved
+- `/analyze` PHASE 2: thêm Solution Spectrum (Level 0-4) evaluation trước khi propose
+  - Level 0: Existing SaaS/tool | Level 1: Configure/integrate | Level 2: No-code
+  - Level 3: Light script | Level 4: Full custom build
+  - WebSearch verify tools + pricing trước khi recommend
+  - Không mặc định Level 4. Recommend level thấp nhất giải quyết được
+  - Solution template có thêm: Level, Chi phí ước tính
+- `/variants`: thêm no-code/low-code dimension bắt buộc xem xét
+  - Approach template có thêm: Build level, Chi phí ước tính
+  - WebSearch landscape trước khi brainstorm
+  - Bảng so sánh có thêm: Build level, Chi phí
+
+---
+
 ## [v0.3.0] 2026-03-29 — Report generation skills
 
 ### Added

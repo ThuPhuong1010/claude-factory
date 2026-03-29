@@ -52,9 +52,11 @@ claude
 ```
 context/input.md  (mô tả ý tưởng)
        ↓
-  /variants  → so sánh 2-3 approaches khác nhau
+  /research  → (optional) research tools/pricing/best practices real-time
        ↓
-  /analyze   → DISCOVER → PROPOSE solutions → GENERATE plan + PRD + tasks
+  /variants  → so sánh approaches: existing tool vs no-code vs build
+       ↓
+  /analyze   → DISCOVER → evaluate solution spectrum (Level 0-4) → PROPOSE → GENERATE plan
        ↓
   /build     → autonomous loop: code → test → fix → commit (không hỏi lại)
        ↓
@@ -65,6 +67,8 @@ context/input.md  (mô tả ý tưởng)
   /handoff   → verify clean state → bàn giao cho session tiếp
 ```
 
+**Không phải lúc nào cũng cần build code.** `/analyze` evaluate từ Level 0 (existing tool) → Level 4 (full build) — recommend level thấp nhất giải quyết được vấn đề.
+
 **Sau khi plan approved:** Claude tự quyết định mọi thứ — không hỏi lại.
 - Uncertain? → Chọn option phổ biến, log vào `context/decisions.md`
 - Cần external service? → RAISE vào `docs/reports/integration-needs.md`
@@ -72,12 +76,13 @@ context/input.md  (mô tả ý tưởng)
 
 ---
 
-## Commands (14)
+## Commands (15)
 
 | Command | Mô tả |
 |---------|-------|
-| `/variants` | So sánh 2-3 approaches trước khi chọn hướng đi |
-| `/analyze` | Phân tích idea → propose solutions → tạo PRD + tasks + how-to-run |
+| `/research` | Research real-time: tools, pricing, best practices — tổng hợp có nguồn |
+| `/variants` | So sánh 2-3 approaches (bao gồm no-code/low-code options) trước khi chọn |
+| `/analyze` | Phân tích idea → evaluate solution spectrum → propose → tạo PRD + tasks |
 | `/plan` | Lập kế hoạch chi tiết cho task tiếp theo |
 | `/build` | Build tự động — không hỏi lại, self-review trước mỗi commit |
 | `/test` | Test theo tier phù hợp với solution type |
