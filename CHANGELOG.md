@@ -5,6 +5,21 @@ Format: `[vX.Y.Z] YYYY-MM-DD — mô tả ngắn`
 
 ---
 
+## [v0.6.0] 2026-03-29 — Structure cleanup + thin preset rewrites
+
+### Fixed
+- **C1**: `settings.json` hardcoded path → relative path (`.claude\notify.ps1`)
+- **C2**: Xóa `docs/solution-types.md` (99 dòng orphan, không được reference ở đâu)
+- **C3**: Đổi tên `context/changelog.md` → `context/requirements-log.md` (tránh nhầm với CHANGELOG.md)
+- **C4**: Đổi tên `docs/rules/design.md` → `docs/rules/ui-design.md` (tránh collision với `.claude/rules/design.md`)
+
+### Improved (thin presets rewritten to match new standard)
+- `extension.md` 37→95 lines: VSCode activate/deactivate pattern, Browser MV3 messaging, permission rules, build pipeline
+- `cli.md` 31→90 lines: error handling (Node + Python), UX rules, exit code table, config file, distribution
+- `ai-app.md` 35→95 lines: stack table, streaming + Zustand, prompt cache, tool use/agent pattern, eval format
+
+---
+
 ## [v0.5.0] 2026-03-29 — Advanced structure gaps: presets, dependency check, upgrade path
 
 ### Added

@@ -184,6 +184,7 @@ claude-factory/
 │   │   └── how-to-run.md          # Generated: Hướng dẫn dùng output
 │   ├── rules/
 │   │   ├── universal.md           # Rules áp dụng mọi solution
+│   │   ├── ui-design.md           # Ant Design UI/UX guide (Web App)
 │   │   ├── git-branching.md       # Branching strategy
 │   │   ├── security.md            # Security + bypassPermissions warning
 │   │   └── presets/               # Rules theo solution type

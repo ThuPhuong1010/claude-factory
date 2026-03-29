@@ -14,7 +14,7 @@ Load khi solution type = Web App / Web Service / SaaS.
 - Mọi page phải có: loading (Skeleton) + empty (Empty) + error (Result) states
 - Responsive: Ant Grid Row/Col với breakpoints xs/md/lg
 - Colors: Ant Design token qua ConfigProvider — không hardcode hex
-- Xem docs/rules/design.md để biết thêm
+- Xem docs/rules/ui-design.md để biết thêm
 
 ## Architecture
 - Layers: UI → Hooks → Services → API → Database

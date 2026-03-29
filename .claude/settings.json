@@ -28,7 +28,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "powershell.exe -ExecutionPolicy Bypass -File 'd:\\Personal_Project\\Vibing\\Vibing\\.claude\\notify.ps1'",
+            "command": "powershell.exe -ExecutionPolicy Bypass -File '.claude\\notify.ps1'",
             "async": true
           }
         ]
@@ -39,7 +39,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "powershell.exe -ExecutionPolicy Bypass -File 'd:\\Personal_Project\\Vibing\\Vibing\\.claude\\check-parallel.ps1'"
+            "command": "powershell.exe -ExecutionPolicy Bypass -File '.claude\\check-parallel.ps1'"
           }
         ]
       }
