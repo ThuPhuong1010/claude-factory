@@ -102,10 +102,3 @@ fix(claude/db): fix connection pool
 | `/worktree merge` | Merge và đóng feature |
 | `/worktree teardown` | Tắt parallel mode, xóa worktree |
 
----
-
-## TEST
-
-```bash
-bash docs/testing/run-parallel-test.sh
-```

@@ -51,10 +51,15 @@ Tech stack, architecture, testing approach → xác định trong /analyze dựa
 
 ## Rules (conditional — load từ docs/rules/presets/ theo solution type)
 - Web App → docs/rules/presets/web.md
-- CLI/Script → docs/rules/presets/cli.md
+- API / Service → docs/rules/presets/api-service.md
+- CLI / Script → docs/rules/presets/cli.md
+- Script / Bot → docs/rules/presets/script-bot.md
 - Automation → docs/rules/presets/automation.md
 - Extension → docs/rules/presets/extension.md
+- Desktop App → docs/rules/presets/desktop-app.md
+- Mobile App → docs/rules/presets/mobile-app.md
 - AI/LLM App → docs/rules/presets/ai-app.md
+- Process / Docs → docs/rules/presets/process-docs.md
 - Precedence khi conflict: universal < preset < task-level instruction
 - Git branching → docs/rules/git-branching.md
 

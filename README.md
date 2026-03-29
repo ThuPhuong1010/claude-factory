@@ -76,23 +76,24 @@ context/input.md  (mô tả ý tưởng)
 
 ---
 
-## Commands (15)
+## Commands (16)
 
 | Command | Mô tả |
 |---------|-------|
-| `/research` | Research real-time: tools, pricing, best practices — tổng hợp có nguồn |
+| `/research` | Research real-time: tools, pricing, best practices — tổng hợp có nguồn, cache vào docs/reports/ |
 | `/variants` | So sánh 2-3 approaches (bao gồm no-code/low-code options) trước khi chọn |
-| `/analyze` | Phân tích idea → evaluate solution spectrum → propose → tạo PRD + tasks |
+| `/analyze` | Phân tích idea → evaluate solution spectrum (Level 0-4) → propose → tạo PRD + tasks |
 | `/plan` | Lập kế hoạch chi tiết cho task tiếp theo |
-| `/build` | Build tự động — không hỏi lại, self-review trước mỗi commit |
+| `/build` | Build tự động — dependency check, self-review, memory update, không hỏi lại |
 | `/test` | Test theo tier phù hợp với solution type |
-| `/review` | Code review + design checklist |
+| `/review` | Code review + solution-type-aware checklist (Web/Desktop/Mobile/CLI/API/Bot...) |
 | `/fix` | Fix bug (max 3 attempts → log NEEDS_HUMAN) |
 | `/status` | Xem trạng thái session hiện tại |
 | `/handoff` | Kết thúc session — verify clean state + tạo handoff note |
 | `/sync` | Sync context files với code hiện tại |
 | `/deploy-check` | Pre-deployment checklist |
 | `/push` | Kiểm tra commits chưa push → push sau khi confirm |
+| `/upgrade` | Sync template improvements vào project đang dùng |
 | `/discover` | Làm rõ ý tưởng mơ hồ qua câu hỏi có cấu trúc |
 | `/worktree` | Parallel mode: setup/sync/merge/teardown worktree cho 2 agents |
 
@@ -187,16 +188,21 @@ claude-factory/
 │   │   ├── security.md            # Security + bypassPermissions warning
 │   │   └── presets/               # Rules theo solution type
 │   │       ├── web.md             # Next.js + DB migration
+│   │       ├── api-service.md     # REST API / Microservice / Webhook
 │   │       ├── ai-app.md          # LLM app + cost control + prompt safety
-│   │       ├── cli.md
-│   │       ├── automation.md
-│   │       └── extension.md
+│   │       ├── cli.md             # CLI Tool / Script
+│   │       ├── script-bot.md      # Bot (Telegram, Discord, Slack) + scheduled job
+│   │       ├── automation.md      # n8n, Make, Zapier, workflow
+│   │       ├── extension.md       # VSCode / Browser extension
+│   │       ├── desktop-app.md     # Electron / Tauri
+│   │       ├── mobile-app.md      # React Native / Expo
+│   │       └── process-docs.md    # SOP / Runbook / System design
 │   ├── testing/
 │   │   └── test-scenarios.md      # Template cho Tier 3-4 testing
 │   └── reports/                   # integration-needs, qa-report
 ├── memory/              # Persistent learning (cross-session)
 ├── tracklog/            # Session state + handoff notes
-├── templates/           # PRD, how-to-run, .env.example, setup-github
+├── templates/           # PRD, architecture, how-to-run, .env.example, setup-github
 ├── variants/            # Approach variant comparison
 ├── versions/            # Version history
 ├── .gitignore           # Covers Node, Python, mobile, extension artifacts
@@ -210,15 +216,15 @@ claude-factory/
 
 | Component | ~Tokens |
 |-----------|---------|
-| CLAUDE.md | ~1,500 |
+| CLAUDE.md | ~1,800 |
 | Skills metadata | ~500 |
 | context/tasks.md | ~500 |
 | tracklog/active.md | ~300 |
 | memory/bugs.md | ~200 |
-| 1 skill SKILL.md | ~800 |
-| **Total per task** | **~3,800** |
+| 1 skill SKILL.md | ~1,200 |
+| **Total per task** | **~4,500** |
 
-So với load-all 36 skills (~20,000+ tokens): **tiết kiệm ~80%** nhờ lazy-loading.
+So với load-all 37 skills (~30,000+ tokens): **tiết kiệm ~85%** nhờ lazy-loading.
 
 ---
 

@@ -5,6 +5,30 @@ Format: `[vX.Y.Z] YYYY-MM-DD — mô tả ngắn`
 
 ---
 
+## [v0.5.0] 2026-03-29 — Advanced structure gaps: presets, dependency check, upgrade path
+
+### Added
+- **5 new presets** (CLAUDE.md now maps all 10 solution types):
+  - `api-service.md` — REST API, Microservice, Webhook (response format, versioning, rate limit)
+  - `desktop-app.md` — Electron/Tauri (IPC security, main/renderer separation, auto-updater)
+  - `mobile-app.md` — React Native/Expo (SafeAreaView, platform differences, EAS build)
+  - `script-bot.md` — Telegram/Discord/Slack bot, scheduled job (idempotency, process manager)
+  - `process-docs.md` — SOP/Runbook/System design (document quality rules, SOP/Runbook format)
+- `templates/architecture.md` — template cho context/architecture.md (Mermaid diagram, component breakdown, data flow)
+- `/upgrade` command (#16) — sync template improvements vào project đang dùng, safe merge strategy
+
+### Improved
+- `/build`: thêm dependency blocking check (skip task nếu dependency chưa DONE)
+- `/build`: thêm memory update trigger sau mỗi task (patterns.md, errors.md)
+- `/review`: Design Checklist → solution-type-aware (Web/Desktop/Mobile/CLI/API/Bot/Automation/Extension)
+- `/research`: thêm caching mechanism — save vào docs/reports/research-{slug}.md, reuse nếu < 30 ngày
+- `/analyze` PHASE 3: dùng templates/architecture.md khi tạo context/architecture.md
+- `CLAUDE.md`: cập nhật preset mapping đầy đủ 10 solution types
+- `AGENTS.md`: xóa broken reference đến file đã bị xóa (run-parallel-test.sh)
+- `README.md`: 15→16 commands, token budget cập nhật (~4,500/task), project structure cập nhật
+
+---
+
 ## [v0.4.0] 2026-03-29 — Proactive solution recommendation + real-time research
 
 ### Added

@@ -157,7 +157,9 @@ Sau khi user confirm solution:
 2. Xác định Testing Tier từ docs/rules/testing-strategy.md
 3. Tạo context/techstack.md — stack + commands + testing tier
 4. Tạo context/prd.md từ templates/prd.md
-5. Tạo context/architecture.md — cấu trúc + mermaid diagram
+5. Tạo context/architecture.md từ templates/architecture.md:
+   - Điền Solution Type, Layer Diagram (Mermaid), Component Breakdown
+   - Data Flow diagram, Key Design Decisions, External Dependencies
 6. Tạo context/tasks.md — task list đầy đủ:
    - ID, Title, Description, Acceptance Criteria
    - Dependencies, Effort (S/M/L), Status: TODO, Version: v0.1.0

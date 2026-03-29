@@ -85,7 +85,31 @@ Chạy WebSearch cho từng query. Thu thập:
 - [url 2]
 ```
 
-### Bước 4 — Suggest next steps
+### Bước 4 — Cache kết quả
+
+Sau khi research xong, **luôn lưu vào file** để không search lại:
+
+```bash
+# Tạo file: docs/reports/research-{topic-slug}.md
+# Ví dụ: docs/reports/research-email-tools.md
+#         docs/reports/research-stripe-vietnam.md
+```
+
+Format file cache = format report ở trên + header:
+```
+---
+researched: [date]
+topic: [topic]
+note: Verify lại nếu đã qua 30 ngày — pricing/features thay đổi nhanh
+---
+```
+
+**Lần sau khi cần research cùng topic:**
+- Kiểm tra `docs/reports/` trước
+- Nếu file tồn tại và < 30 ngày → dùng cached, không search lại
+- Nếu > 30 ngày hoặc user muốn update → search lại, overwrite file
+
+### Bước 5 — Suggest next steps
 
 Sau report, suggest:
 ```
