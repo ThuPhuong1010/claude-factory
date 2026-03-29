@@ -5,6 +5,23 @@ Format: `[vX.Y.Z] YYYY-MM-DD — mô tả ngắn`
 
 ---
 
+## [v0.3.0] 2026-03-29 — Report generation skills
+
+### Added
+- `report-generation` skill — pipeline tổng hợp: data → chart → docx/pdf/pptx
+  - Python (python-docx + Matplotlib + Mermaid API) + Node (Puppeteer + Chart.js)
+  - Cleanup temp files, naming convention, Mermaid via API không cần install
+
+### Improved
+- `data-visualization` — rewrite hoàn toàn: pivot sang Mermaid + Matplotlib + Plotly
+  - Mermaid diagrams (flowchart, sequence, ER, Gantt) + export CLI + API
+  - Matplotlib data charts export PNG cho nhúng vào document
+  - Recharts giữ lại cho web UI use case
+- `document-generation` — thêm Phân tích, Design flow, Common Mistakes
+- `presentations` — thêm Phân tích, python-pptx chart embed, Marp với Mermaid
+
+---
+
 ## [v0.2.0] 2026-03-29 — Skills rewrite + multi-user gaps
 
 ### Added

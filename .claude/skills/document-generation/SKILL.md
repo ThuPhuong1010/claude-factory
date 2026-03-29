@@ -5,107 +5,174 @@ description: "Tạo file Word (.docx), PDF từ template hoặc data. Trigger kh
 
 # Document Generation
 
-## Word (.docx)
+## Khi nào cần đọc skill này
+- Output của feature là file Word hoặc PDF
+- Cần export report, invoice, contract dạng document
+- Cần nhúng chart/image vào document
+- User cần tải file về
 
-### Node.js — docxtemplater (template-based, recommended)
+---
+
+## Phân tích — Chọn Tool
+
+| Tình huống | Tool | Stack |
+|-----------|------|-------|
+| Word từ template `.docx` có sẵn | **docxtemplater** | Node.js |
+| Word tạo từ code (không có template) | **python-docx** | Python |
+| PDF đẹp từ HTML/CSS | **Puppeteer** | Node.js |
+| PDF đơn giản từ code | **PDFKit** / **ReportLab** | Node / Python |
+| PDF từ HTML+CSS phức tạp | **WeasyPrint** | Python |
+| Word + chart embed | **python-docx** + Matplotlib | Python |
+| PDF + chart embed | Puppeteer (render HTML có chart) | Node.js |
+
+**Quyết định nhanh:**
+```
+Có template Word sẵn?          → docxtemplater (fill data vào template)
+Không có template?
+  → Cần format tự do            → python-docx hoặc PDFKit
+  → Cần pixel-perfect layout    → Puppeteer (design HTML → export PDF)
+Cần nhúng chart?               → Generate chart ra PNG trước → embed
+```
+
+---
+
+## Design — Word từ template (docxtemplater)
+
+Workflow: tạo file `.docx` template trước (trong Word), dùng syntax `{variable}` làm placeholder.
+
 ```bash
 npm install docxtemplater pizzip
 ```
-```js
-const PizZip = require('pizzip');
-const Docxtemplater = require('docxtemplater');
-const fs = require('fs');
 
-const content = fs.readFileSync('template.docx', 'binary');
-const zip = new PizZip(content);
-const doc = new Docxtemplater(zip, { paragraphLoop: true });
+```typescript
+import PizZip from 'pizzip'
+import Docxtemplater from 'docxtemplater'
+import fs from 'fs'
 
-doc.render({ name: 'Phuong', date: '2026-03-29', items: [...] });
+function generateDocx(templatePath: string, data: Record<string, unknown>, outputPath: string) {
+  const content = fs.readFileSync(templatePath, 'binary')
+  const zip = new PizZip(content)
+  const doc = new Docxtemplater(zip, { paragraphLoop: true, linebreaks: true })
 
-const buf = doc.getZip().generate({ type: 'nodebuffer' });
-fs.writeFileSync('output.docx', buf);
+  doc.render(data)
+
+  const buf = doc.getZip().generate({ type: 'nodebuffer', compression: 'DEFLATE' })
+  fs.writeFileSync(outputPath, buf)
+}
+
+// Dùng:
+generateDocx('templates/report.docx', {
+  title: 'Báo cáo tháng 3',
+  date: '29/03/2026',
+  items: [
+    { name: 'Sản phẩm A', qty: 10, total: '1,000,000đ' },
+    { name: 'Sản phẩm B', qty: 5,  total: '500,000đ' },
+  ],
+  grand_total: '1,500,000đ'
+}, 'output/report.docx')
 ```
-Template syntax trong .docx: `{name}`, `{#items}{item}{/items}`
 
-### Python — python-docx (tạo từ code)
-```bash
-pip install python-docx
-```
+Template syntax trong `.docx`:
+- `{variable}` — giá trị đơn
+- `{#items}{name} - {total}{/items}` — loop array
+- `{?condition}nội dung{/condition}` — conditional
+
+---
+
+## Design — Word từ code (python-docx)
+
 ```python
 from docx import Document
-from docx.shared import Pt, Inches
+from docx.shared import Pt, Inches, RGBColor
+from docx.enum.text import WD_ALIGN_PARAGRAPH
 
 doc = Document()
-doc.add_heading('Báo cáo', 0)
-doc.add_paragraph('Nội dung...')
 
+# Heading
+heading = doc.add_heading('Báo cáo doanh thu', level=0)
+heading.alignment = WD_ALIGN_PARAGRAPH.CENTER
+
+# Paragraph
+doc.add_paragraph('Kính gửi Ban Giám Đốc,')
+
+# Table
 table = doc.add_table(rows=1, cols=3)
 table.style = 'Table Grid'
 hdr = table.rows[0].cells
-hdr[0].text = 'STT'
+hdr[0].text = 'Sản phẩm'
+hdr[1].text = 'Số lượng'
+hdr[2].text = 'Doanh thu'
+
+for item in items:
+    row = table.add_row().cells
+    row[0].text = item['name']
+    row[1].text = str(item['qty'])
+    row[2].text = item['total']
+
+# Nhúng chart (generate trước, save ra PNG)
+doc.add_picture('chart.png', width=Inches(5))
 
 doc.save('output.docx')
 ```
 
 ---
 
-## PDF
+## Design — PDF từ HTML (Puppeteer)
 
-### Node.js — Puppeteer (HTML → PDF, best quality)
-```bash
-npm install puppeteer
-```
-```js
-const puppeteer = require('puppeteer');
+Tốt nhất khi cần layout phức tạp, styling CSS, chart nhúng.
 
-const browser = await puppeteer.launch();
-const page = await browser.newPage();
-await page.setContent('<html>...</html>');
-await page.pdf({ path: 'output.pdf', format: 'A4', printBackground: true });
-await browser.close();
-```
+```typescript
+import puppeteer from 'puppeteer'
 
-### Node.js — PDFKit (programmatic, no HTML)
-```bash
-npm install pdfkit
-```
-```js
-const PDFDocument = require('pdfkit');
-const fs = require('fs');
+async function generatePDF(html: string, outputPath: string) {
+  const browser = await puppeteer.launch({ headless: 'new' })
+  const page = await browser.newPage()
 
-const doc = new PDFDocument();
-doc.pipe(fs.createWriteStream('output.pdf'));
-doc.fontSize(25).text('Title', 100, 80);
-doc.end();
-```
+  await page.setContent(html, { waitUntil: 'networkidle0' })
+  await page.pdf({
+    path: outputPath,
+    format: 'A4',
+    printBackground: true,
+    margin: { top: '20mm', right: '15mm', bottom: '20mm', left: '15mm' }
+  })
 
-### Python — ReportLab (programmatic)
-```bash
-pip install reportlab
-```
-```python
-from reportlab.pdfgen import canvas
-c = canvas.Canvas("output.pdf")
-c.drawString(100, 750, "Hello!")
-c.save()
-```
+  await browser.close()
+}
 
-### Python — WeasyPrint (HTML/CSS → PDF)
-```bash
-pip install weasyprint
-```
-```python
-from weasyprint import HTML
-HTML(string='<h1>Report</h1>').write_pdf('output.pdf')
+// HTML template có thể dùng inline CSS, base64 image (chart)
+const html = `
+<html>
+<head><style>
+  body { font-family: 'Arial', sans-serif; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { border: 1px solid #ddd; padding: 8px; }
+</style></head>
+<body>
+  <h1>Báo cáo tháng 3</h1>
+  <img src="data:image/png;base64,${chartBase64}" width="500"/>
+  ${tableHtml}
+</body>
+</html>`
 ```
 
 ---
 
-## Khi nào dùng gì
-| Case | Tool |
-|------|------|
-| Word từ template có sẵn | docxtemplater (Node) |
-| Word từ code | python-docx |
-| PDF đẹp từ HTML | Puppeteer |
-| PDF đơn giản | PDFKit / ReportLab |
-| PDF từ HTML+CSS phức tạp | WeasyPrint |
+## Implementation Rules
+
+- Generate chart ra file PNG trước, sau đó embed — không inline SVG phức tạp.
+- Puppeteer cần `waitUntil: 'networkidle0'` nếu HTML có font load từ CDN.
+- docxtemplater: nếu template có image placeholder, cần plugin `docxtemplater-image-module`.
+- Tên file output nên có timestamp để tránh ghi đè: `report_2026-03-29.pdf`.
+- Dọn file tạm (chart PNG) sau khi embed xong.
+
+---
+
+## Common Mistakes
+
+| Sai | Đúng |
+|-----|------|
+| Không có template → viết HTML thuần rồi export | Dùng docxtemplater nếu client cần `.docx` editable |
+| Puppeteer không chờ font/image load | Thêm `waitUntil: 'networkidle0'` |
+| Nhúng SVG phức tạp trực tiếp vào docx | Convert sang PNG trước (`matplotlib savefig`) |
+| Không dọn file tạm | Delete PNG sau khi embed xong |
+| File tên cố định bị ghi đè | Thêm timestamp vào tên output |

@@ -106,7 +106,7 @@ context/input.md  (mô tả ý tưởng)
 
 ---
 
-## Skills (36 — lazy-loaded)
+## Skills (37 — lazy-loaded)
 
 Chỉ load khi cần, tiết kiệm context. Mỗi skill = domain knowledge pack:
 
@@ -118,7 +118,7 @@ Chỉ load khi cần, tiết kiệm context. Mỗi skill = domain knowledge pack
 | **Infrastructure** | `docker`, `ci-cd`, `monitoring`, `file-storage` |
 | **Payments & Comms** | `payment`, `email` |
 | **Solution-specific** | `browser-extension`, `vscode-extension`, `desktop-app`, `mobile-app` |
-| **Data** | `spreadsheet`, `document-generation`, `data-visualization`, `presentations` |
+| **Data** | `spreadsheet`, `document-generation`, `data-visualization`, `presentations`, `report-generation` |
 | **Dev** | `error-handling`, `security`, `testing`, `python-scripting` |
 | **Automation** | `workflow-automation`, `cron-scheduler` |
 | **Utilities** | `context-ingestion` (PDF, docx, audio → context) |
