@@ -1,6 +1,11 @@
 Phân tích ý tưởng → propose solutions → lấy approval → generate plan.
 Chạy theo 3 phases. KHÔNG bỏ qua phase nào.
 
+> **Khi nào dùng /discover trước?**
+> - Idea còn rất mờ (1-2 câu, chưa rõ vấn đề là gì) → `/discover` trước để làm rõ
+> - Idea đủ rõ (đã có context/input.md với 3+ fields) → `/analyze` thẳng
+> - `/analyze` cũng có PHASE 1 tự hỏi thêm nếu thiếu thông tin — `/discover` không bắt buộc
+
 ---
 
 ## PHASE 1: DISCOVER (luôn chạy đầu tiên)

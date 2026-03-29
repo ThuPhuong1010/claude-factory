@@ -46,6 +46,21 @@
 - Không thêm package nếu có thể dùng built-in hoặc đã có dependency tương tự
 - Chạy `npm audit` / `pip audit` trước khi commit dependency mới
 
+## Naming Conventions
+- Code/functions: camelCase (`getUserById`) | Python: snake_case (`get_user_by_id`)
+- Components/Classes: PascalCase (`UserProfile`)
+- API endpoints: kebab-case plural (`/api/user-profiles`)
+- Database: snake_case (`first_name`, `user_id`)
+- Constants: SCREAMING_SNAKE_CASE (`MAX_RETRY_COUNT`)
+- Files: kebab-case (`user-profile.ts`) hoặc nhất quán theo project convention
+
+## Performance & Operation
+- Structured logs (JSON format) — không log PII (email, password, token)
+- Paginate mọi list response (default page size 20)
+- Dynamic import / lazy load cho heavy modules
+- Health check endpoint: `GET /api/health` (hoặc tương đương)
+- Images: lazy load, serve với correct dimensions
+
 ## Memory Rotation
 - memory/bugs.md có thể accumulate theo thời gian
 - Bug đã được fix và đã qua 2 versions: move entry sang memory/archive/bugs.md

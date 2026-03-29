@@ -242,6 +242,12 @@ RAISE trong `docs/reports/integration-needs.md` trước khi add. Xem `docs/rule
 
 ---
 
+## Changelog
+
+Xem [`CHANGELOG.md`](CHANGELOG.md) để biết lịch sử thay đổi của template.
+
+---
+
 ## License
 
 MIT

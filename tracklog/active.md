@@ -1,24 +1,24 @@
 # Active Context
-Updated: 2026-03-29 | By: Claude
+Updated: <!-- YYYY-MM-DD --> | By: Claude
 
 ## PARALLEL MODE: OFF
 <!-- Đổi thành ON khi chạy /worktree setup -->
 
 ## NOW
-Task: Project setup complete | Status: DONE
+Task: <!-- Task đang làm --> | Status: <!-- TODO / IN_PROGRESS / DONE -->
 
 ## PROGRESS
-Done: 1/1 | TODO: 0
+Done: 0/0 | TODO: 0
 Version: v0.1.0
 
 ## NEXT
 - Viết idea vào context/input.md
-- Chạy /variants để test approaches
 - Chạy /analyze để tạo PRD + tasks
+- Chạy /build để bắt đầu build
 
 ## GitHub
-Repo: https://github.com/ThuPhuong1010/claude-factory
-Branch: master
+Repo: <!-- URL repo của mày -->
+Branch: main
 
 ## LOCKED FILES
 <!-- Ghi vào đây khi edit shared/config files (chỉ dùng khi PARALLEL MODE: ON) -->
