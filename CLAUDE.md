@@ -74,6 +74,7 @@ Tech stack, architecture, testing approach → xác định trong /analyze dựa
 - Uncertain? Pick common option, log in context/decisions.md
 - Need external tool/API? RAISE in docs/reports/integration-needs.md
 - Bug won't fix after 3 tries? Log [NEEDS_HUMAN], move to next task.
+- Requirement changed mid-build? Log in context/requirements-log.md (date + change + reason + impact)
 
 ## Skills
 Available in .claude/skills/. Auto-triggered by context.

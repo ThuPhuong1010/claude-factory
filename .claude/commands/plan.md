@@ -1,10 +1,35 @@
-Review and validate the plan. Run AFTER /analyze.
+Review và validate plan sau /analyze. Chạy TRƯỚC /build để verify plan chắc chắn.
 
-1. Read all context/ files
-2. Verify: tasks cover ALL PRD requirements (no gaps)
-3. Verify: task dependencies are acyclic
-4. Verify: each task has clear acceptance criteria
-5. Verify: MVP scope (v0.1.0) is achievable in ~3-5 sessions
-6. Check docs/reports/integration-needs.md — any blockers?
-7. Print plan summary with task count per version
-8. Ask user: "Duyệt plan? Sau khi duyệt, tôi sẽ tự động hoàn toàn."
+1. Đọc tất cả context/ files (tasks.md, prd.md, architecture.md, techstack.md)
+2. Verify: tasks cover ĐỦ mọi PRD requirement — không bỏ sót F-0X nào
+3. Verify: dependency graph acyclic — không có circular dependency
+4. Verify: mọi task có Acceptance Criteria rõ ràng, không mơ hồ
+5. Verify: MVP scope (v0.1.0) build được trong ~3-5 sessions
+6. Check docs/reports/integration-needs.md → có blocker nào chưa resolve?
+7. Check context/techstack.md → testing tier xác định chưa?
+
+Output format:
+
+```
+PLAN REVIEW: {APPROVED ✅ | NEEDS_REVISION ⚠️}
+─────────────────────────────────────────────
+Solution : {tên từ prd.md}
+Stack    : {stack từ techstack.md}
+Tier     : {testing tier}
+
+Tasks    : {total} total ({MVP count} MVP, {v0.2+ count} backlog)
+Effort   : ~{S+M+L tổng} → ước tính {X} sessions
+
+{Nếu APPROVED}:
+✅ PRD coverage: full
+✅ Dependencies: clean
+✅ Acceptance criteria: all clear
+✅ MVP scope: achievable
+→ "Plan ổn. Gõ /build để bắt đầu."
+
+{Nếu NEEDS_REVISION}:
+⚠️ Issues found:
+  - [Cụ thể vấn đề 1]
+  - [Cụ thể vấn đề 2]
+→ "Fix những điểm trên trong context/tasks.md rồi /plan lại."
+```

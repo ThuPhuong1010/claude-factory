@@ -5,6 +5,20 @@ Format: `[vX.Y.Z] YYYY-MM-DD — mô tả ngắn`
 
 ---
 
+## [v0.7.0] 2026-03-29 — Depth fixes: commands, presets, skills
+
+### Improved
+- `deploy-check.md` 12→75 lines: stack-aware checklists (Web/Python/CLI/Desktop/Mobile/Extension/Automation), output format
+- `status.md` 7→25 lines: fixed output format với task breakdown, next task, bug count
+- `sync.md` 8→25 lines: explicit output format, handoff absorption detail
+- `plan.md` 10→30 lines: APPROVED vs NEEDS_REVISION output format
+- `web.md` 39→85 lines: auth flow, form pattern, data fetching pattern, full directory structure
+- `automation.md` 48→90 lines: error handling + retry pattern, idempotency, DLQ, test scenarios cho error/retry
+- `ci-cd` skill 70→130 lines: Python+Docker pipeline, multi-environment, manual approval, per-stack quick reference
+- `CLAUDE.md`: mention `context/requirements-log.md` cho mid-build requirement changes
+
+---
+
 ## [v0.6.0] 2026-03-29 — Structure cleanup + thin preset rewrites
 
 ### Fixed
